@@ -75,7 +75,11 @@ class Tmdb
       }.merge(query_values)
       uri.query_values = query_values
     end
-    url            = [Tmdb.base_api_url, method, data[:id], action].compact.join '/'
+    if action=='credits'
+      url            = [Tmdb.base_api_url, method, data[:id], action].compact.join '/'
+    else
+      url            = [Tmdb.base_api_url, method, data[:id], action].compact.join '/'
+    end
     url_with_query = [url, uri.query].compact.join '?'
     
     response = Tmdb.get_url(url_with_query)
